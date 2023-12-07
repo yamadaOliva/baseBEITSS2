@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 require;
-import User from "../models/user.js";
+import User from "../models/User.js";
 import Product from "../models/Product.js";
 import Image from "../models/Image.js";
 import Moduless from "../models/Moduless.js";
@@ -10,6 +10,8 @@ mongoose.connect("mongodb+srv://kien2572001:fEDmCm4G8swhO1B9@itss2.gixbqiu.mongo
   useUnifiedTopology: true,
 });
 const seedUsers = async () => {
+  // Delete all documents from Moduless collection
+  await User.deleteMany();
     const users = [];
     for (let i = 0; i < 2; i++) {
         users.push({

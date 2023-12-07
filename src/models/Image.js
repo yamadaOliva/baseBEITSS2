@@ -9,4 +9,4 @@ const ImageSchema = new Schema({
   created_at: { type: Date, required: true },
 });
 
-export default mongoose.model("Image", ImageSchema);
+export default ImageSchema;

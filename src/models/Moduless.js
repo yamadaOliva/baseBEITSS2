@@ -6,4 +6,4 @@ const ModulessSchema = new Schema({
   product_id: { type: String, required: true },
 });
 
-export default mongoose.model("Moduless", ModulessSchema);
+export default ModulessSchema;

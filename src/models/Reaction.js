@@ -9,4 +9,4 @@ const ReactionSchema = new Schema({
   created_at: { type: Date, required: true },
 });
 
-export default mongoose.model("Reaction", ReactionSchema);
+export default ReactionSchema;

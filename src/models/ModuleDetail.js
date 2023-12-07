@@ -9,4 +9,4 @@ const ModuleDetailSchema = new Schema({
   created_at: { type: Date, required: true },
 });
 
-export default mongoose.model("ModuleDetail", ModuleDetailSchema);
+export default ModuleDetailSchema;

@@ -1,4 +1,5 @@
 import mongoose, { Schema, ObjectId } from "mongoose";
+import ReviewSchema from "./Review";
 export default mongoose.model(
   "User",
   new Schema({
