@@ -26,33 +26,44 @@ const seedUsers = async () => {
   }
   await User.insertMany(users);
 };
+const getNRandom = (arr,n) => {
+  const result = [];
+  let tmp = [...arr];
+  for (let i = 0; i < n; i++) {
+    const random = Math.floor(Math.random() * tmp.length);
+    result.push(tmp[random]);
+    tmp.splice(random, 1);
+  }
+  return result;
+};
+
 const seedStores = async () => {
   // Delete all documents from Moduless collection
+  const fs = require("fs");
+  const data = fs.readFileSync("./src/seeders/store.json", "utf8");
+  const dataTest = JSON.parse(data);
+  let storeData = dataTest?.store;
+  let productData = dataTest?.product;
+  let storeImage = dataTest?.storeImage;
+  let productImage = dataTest?.productImage;
   await Store.deleteMany();
+  productData = productData.map((product) => {
+    product.images = getNRandom(productImage,2);
+    product.rating = 5;
+    return product;
+  });
+  storeData = storeData.map((store) => {
+    store.images = getNRandom(storeImage,2);
+    store.products = getNRandom(productData,10);
+    return store;
+  });
   const stores = [];
-  for (let i = 0; i < 2; i++) {
-    stores.push({
-      id: i,
-      name: faker.commerce.productName(),
-      address: faker.location.streetAddress(),
-      description: faker.lorem.paragraph(),
-      rating: Math.floor(Math.random() * 5),
-      products: [],
-      images: [],
-      reviews: [],
-    });
-  }
-  await Store.insertMany(stores);
-}
+  await Store.insertMany(storeData);
+};
 const seedData = async () => {
   await seedUsers();
   await seedStores();
   //read
-  const users = await User.find();
-  const stores = await Store.find();
-  console.log(stores);
-  console.log(users);
-  mongoose.connection.close();
   console.log("Seeding completed");
 };
 export default seedData;

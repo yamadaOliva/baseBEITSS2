@@ -19,7 +19,6 @@ async function run() {
     await seedData();
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
   }
 }
 export default run;

@@ -1,0 +1,440 @@
+{
+  "store": [
+    {
+      "id": 1,
+      "name": "Laptop88 Trần Duy Hưng",
+      "address": "Số 1 Trần Duy Hưng, Cầu Giấy, Hà Nội",
+      "description": "Cửa hàng chuyên cung cấp các sản phẩm laptop chính hãng"
+    },
+    {
+      "id": 2,
+      "name": "Laptop Center Nguyễn Thị Minh Khai",
+      "address": "Số 15 Nguyễn Thị Minh Khai, Quận 1, TP.Hồ Chí Minh",
+      "description": "Địa chỉ uy tín cho người yêu công nghệ tại TP.Hồ Chí Minh"
+    },
+    {
+      "id": 3,
+      "name": "Tech Plaza Đống Đa",
+      "address": "Số 20 Đống Đa, Hà Nội",
+      "description": "Cửa hàng chuyên về sản phẩm công nghệ hàng đầu tại Hà Nội"
+    },
+    {
+      "id": 4,
+      "name": "Laptop World Phan Kế Bính",
+      "address": "Số 50 Phan Kế Bính, Quận 1, TP.Hồ Chí Minh",
+      "description": "Thế giới laptop tại TP.Hồ Chí Minh với nhiều ưu đãi hấp dẫn"
+    },
+    {
+      "id": 5,
+      "name": "Digital Store Lê Thánh Tôn",
+      "address": "Số 35 Lê Thánh Tôn, Quận 1, TP.Hồ Chí Minh",
+      "description": "Cửa hàng đa dạng sản phẩm công nghệ mới nhất"
+    },
+    {
+      "id": 6,
+      "name": "Elite Computers Bà Triệu",
+      "address": "Số 25 Bà Triệu, Hà Nội",
+      "description": "Điểm đến tin cậy cho những người đam mê công nghệ"
+    },
+    {
+      "id": 7,
+      "name": "Future Tech Cầu Giấy",
+      "address": "Số 10 Cầu Giấy, Hà Nội",
+      "description": "Nơi có những sản phẩm công nghệ tương lai"
+    },
+    {
+      "id": 8,
+      "name": "Gaming Zone Hoàng Quốc Việt",
+      "address": "Số 30 Hoàng Quốc Việt, Hà Nội",
+      "description": "Điểm đến của game thủ với nhiều laptop gaming chất lượng"
+    },
+    {
+      "id": 9,
+      "name": "Hi-Tech Hub Bà Triệu",
+      "address": "Số 45 Bà Triệu, Quận Hai Bà Trưng, Hà Nội",
+      "description": "Trung tâm công nghệ hàng đầu với đội ngũ nhân viên chuyên nghiệp"
+    },
+    {
+      "id": 10,
+      "name": "Mega Electronics Nguyễn Trãi",
+      "address": "Số 55 Nguyễn Trãi, Quận 5, TP.Hồ Chí Minh",
+      "description": "Thế giới điện tử đỉnh cao tại TP.Hồ Chí Minh"
+    },
+    {
+      "id": 11,
+      "name": "Tech City Võ Văn Tần",
+      "address": "Số 40 Võ Văn Tần, Quận 3, TP.Hồ Chí Minh",
+      "description": "Thế giới công nghệ tại TP.Hồ Chí Minh với đa dạng sản phẩm"
+    },
+    {
+      "id": 12,
+      "name": "Epic Electronics Lý Thường Kiệt",
+      "address": "Số 25 Lý Thường Kiệt, Quận 1, TP.Hồ Chí Minh",
+      "description": "Cửa hàng chuyên cung cấp các sản phẩm công nghệ mới nhất"
+    },
+    {
+      "id": 13,
+      "name": "Digital Haven Hoàng Diệu",
+      "address": "Số 15 Hoàng Diệu, Hà Nội",
+      "description": "Nơi đáng tin cậy cho những người đam mê công nghệ"
+    },
+    {
+      "id": 14,
+      "name": "Gizmo Galaxy Nguyễn Văn Cừ",
+      "address": "Số 30 Nguyễn Văn Cừ, Quận 4, TP.Hồ Chí Minh",
+      "description": "Thế giới công nghệ độc đáo với những sản phẩm độc quyền"
+    },
+    {
+      "id": 15,
+      "name": "Smart Station Bùi Thị Xuân",
+      "address": "Số 50 Bùi Thị Xuân, Quận 1, TP.Hồ Chí Minh",
+      "description": "Trạm công nghệ thông minh với đội ngũ tư vấn chuyên nghiệp"
+    },
+    {
+      "id": 16,
+      "name": "Electro Mart Đinh Công Tráng",
+      "address": "Số 18 Đinh Công Tráng, Quận Tân Bình, TP.Hồ Chí Minh",
+      "description": "Siêu thị điện tử với đầy đủ các loại sản phẩm công nghệ"
+    },
+    {
+      "id": 17,
+      "name": "Techno Haven Lê Lợi",
+      "address": "Số 22 Lê Lợi, Quận Hai Bà Trưng, Hà Nội",
+      "description": "Nơi gặp gỡ của những người đam mê công nghệ"
+    },
+    {
+      "id": 18,
+      "name": "Digital Oasis Nguyễn Hữu Cầu",
+      "address": "Số 12 Nguyễn Hữu Cầu, Quận 5, TP.Hồ Chí Minh",
+      "description": "Khu vực lý tưởng cho những người yêu thích công nghệ số"
+    },
+    {
+      "id": 19,
+      "name": "Smart Tech Trần Phú",
+      "address": "Số 28 Trần Phú, Hà Nội",
+      "description": "Cửa hàng công nghệ với những sản phẩm thông minh hàng đầu"
+    },
+    {
+      "id": 20,
+      "name": "Gadget World Lê Duẩn",
+      "address": "Số 35 Lê Duẩn, Quận 1, TP.Hồ Chí Minh",
+      "description": "Thế giới của những thiết bị công nghệ tiên tiến"
+    }
+  ],
+  "product": [
+    {
+      "id": 1,
+      "name": "Laptop Dell Vostro 15 3500 i5 1135G7/8GB/512GB/Win10 (Bản Quyền)",
+      "description": "Một chiếc máy tính văn phòng dành cho dân design",
+      "brand": "Dell",
+      "model": "Vostro 15 3500",
+      "price": 20000000,
+      "sale": 0
+    },
+    {
+      "id": 2,
+      "name": "Laptop HP Pavilion x360 14-dw1038TU i7 1165G7/8GB/512GB/Win10 (Bản Quyền)",
+      "description": "Máy tính xách tay đa năng với khả năng xoay 360 độ",
+      "brand": "HP",
+      "model": "Pavilion x360 14-dw1038TU",
+      "price": 25000000,
+      "sale": 5
+    },
+    {
+      "id": 3,
+      "name": "Laptop ASUS ROG Zephyrus G14 GA401QM R9 5900HS/16GB/1TB/RTX 3060/Win10 (Bản Quyền)",
+      "description": "Máy tính chơi game mạnh mẽ với card đồ họa cao cấp",
+      "brand": "ASUS",
+      "model": "ROG Zephyrus G14 GA401QM",
+      "price": 35000000,
+      "sale": 10
+    },
+    {
+      "id": 4,
+      "name": "Laptop Acer Aspire 5 A515-56-58GF i5 1135G7/8GB/256GB/Win10 (Bản Quyền)",
+      "description": "Máy tính văn phòng giá rẻ, hiệu suất ổn định",
+      "brand": "Acer",
+      "model": "Aspire 5 A515-56-58GF",
+      "price": 15000000,
+      "sale": 0
+    },
+    {
+      "id": 5,
+      "name": "Laptop Lenovo ThinkPad E14 Gen 2 i5 1135G7/8GB/256GB/Win10 (Bản Quyền)",
+      "description": "Máy tính doanh nhân chất lượng cao từ thương hiệu Lenovo",
+      "brand": "Lenovo",
+      "model": "ThinkPad E14 Gen 2",
+      "price": 18000000,
+      "sale": 3
+    },
+    {
+      "id": 6,
+      "name": "Laptop MSI GF63 Thin 9SCXR i7 9750H/16GB/512GB/GTX 1650/Win10 (Bản Quyền)",
+      "description": "Laptop gaming siêu mỏng từ MSI với hiệu suất ổn định",
+      "brand": "MSI",
+      "model": "GF63 Thin 9SCXR",
+      "price": 28000000,
+      "sale": 8
+    },
+    {
+      "id": 7,
+      "name": "Laptop Apple MacBook Air M1 Chip 8GB/256GB (Bản Quyền)",
+      "description": "Máy tính xách tay siêu nhẹ với chip M1 từ Apple",
+      "brand": "Apple",
+      "model": "MacBook Air M1",
+      "price": 35000000,
+      "sale": 5
+    },
+    {
+      "id": 8,
+      "name": "Laptop Dell XPS 15 9510 i9 11900H/32GB/1TB/RTX 3050 Ti/Win10 (Bản Quyền)",
+      "description": "Laptop cao cấp với thiết kế đẹp và hiệu suất mạnh mẽ",
+      "brand": "Dell",
+      "model": "XPS 15 9510",
+      "price": 45000000,
+      "sale": 12
+    },
+    {
+      "id": 9,
+      "name": "Laptop HP Envy 13-ba1019TU i5 1135G7/8GB/512GB/Win10 (Bản Quyền)",
+      "description": "Máy tính xách tay siêu mỏng và sang trọng từ HP",
+      "brand": "HP",
+      "model": "Envy 13-ba1019TU",
+      "price": 23000000,
+      "sale": 6
+    },
+    {
+      "id": 10,
+      "name": "Laptop Dell XPS 13 9310 i7 1165G7/16GB/512GB/Win10 (Bản Quyền)",
+      "description": "Máy tính xách tay siêu nhẹ với màn hình InfinityEdge từ Dell",
+      "brand": "Dell",
+      "model": "XPS 13 9310",
+      "price": 29000000,
+      "sale": 4
+    },
+    {
+      "id": 11,
+      "name": "Laptop ASUS ROG Strix G15 G513QR R9 5900HX/32GB/1TB/RTX 3070/Win10 (Bản Quyền)",
+      "description": "Laptop gaming chất lượng cao với card đồ họa mạnh mẽ",
+      "brand": "ASUS",
+      "model": "ROG Strix G15 G513QR",
+      "price": 45000000,
+      "sale": 12
+    },
+    {
+      "id": 12,
+      "name": "Laptop Acer Swift 5 SF514-55T i5 1135G7/8GB/512GB/Win10 (Bản Quyền)",
+      "description": "Máy tính xách tay siêu nhẹ và mỏng từ Acer",
+      "brand": "Acer",
+      "model": "Swift 5 SF514-55T",
+      "price": 24000000,
+      "sale": 3
+    },
+    {
+      "id": 13,
+      "name": "Laptop Lenovo Legion 5 Pro Ryzen 7 5800H/16GB/1TB/RTX 3060/Win10 (Bản Quyền)",
+      "description": "Laptop gaming với hiệu suất cao từ Lenovo",
+      "brand": "Lenovo",
+      "model": "Legion 5 Pro",
+      "price": 38000000,
+      "sale": 8
+    },
+    {
+      "id": 14,
+      "name": "Laptop HP Spectre x360 13-aw0183TU i7 1165G7/16GB/1TB/Win10 (Bản Quyền)",
+      "description": "Máy tính xách tay 2 trong 1 với thiết kế đẹp từ HP",
+      "brand": "HP",
+      "model": "Spectre x360 13-aw0183TU",
+      "price": 35000000,
+      "sale": 5
+    },
+    {
+      "id": 15,
+      "name": "Laptop Dell Inspiron 15 5502 i5 1135G7/8GB/256GB/Win10 (Bản Quyền)",
+      "description": "Máy tính văn phòng với hiệu suất ổn định từ Dell",
+      "brand": "Dell",
+      "model": "Inspiron 15 5502",
+      "price": 20000000,
+      "sale": 0
+    },
+    {
+      "id": 16,
+      "name": "Laptop ASUS ZenBook 14 UX425EA i5 1135G7/8GB/512GB/Win10 (Bản Quyền)",
+      "description": "Thiết kế mỏng nhẹ và sang trọng từ ASUS",
+      "brand": "ASUS",
+      "model": "ZenBook 14 UX425EA",
+      "price": 26000000,
+      "sale": 6
+    },
+    {
+      "id": 17,
+      "name": "Laptop Acer Nitro 5 AN515-45-R287 R7 5800H/16GB/512GB/RTX 3060/Win10 (Bản Quyền)",
+      "description": "Laptop gaming giá trị với hiệu suất đỉnh cao từ Acer",
+      "brand": "Acer",
+      "model": "Nitro 5 AN515-45-R287",
+      "price": 34000000,
+      "sale": 10
+    },
+    {
+      "id": 18,
+      "name": "Laptop Lenovo Yoga 9i 14ITL5 i7 1185G7/16GB/1TB/Win10 (Bản Quyền)",
+      "description": "Máy tính xách tay 2 trong 1 với màn hình cảm ứng từ Lenovo",
+      "brand": "Lenovo",
+      "model": "Yoga 9i 14ITL5",
+      "price": 42000000,
+      "sale": 7
+    },
+    {
+      "id": 19,
+      "name": "Laptop HP Omen 15-ek0013TX i7 10750H/16GB/512GB/RTX 2060/Win10 (Bản Quyền)",
+      "description": "Laptop gaming hiệu suất cao từ dòng Omen của HP",
+      "brand": "HP",
+      "model": "Omen 15-ek0013TX",
+      "price": 30000000,
+      "sale": 8
+    },
+    {
+      "id": 20,
+      "name": "Laptop Dell Latitude 5411 i7 10850H/16GB/512GB/Win10 (Bản Quyền)",
+      "description": "Máy tính doanh nhân chất lượng từ Dell với tính bảo mật cao",
+      "brand": "Dell",
+      "model": "Latitude 5411",
+      "price": 32000000,
+      "sale": 5
+    }
+  ],
+  "storeImage": [
+    {
+      "url": "https://laptop88.vn/media/news/31_bvcn88_small.jpg"
+    },
+    {
+      "url": "https://laptop88.vn/media/news/1206_photo_2020-03-13_10-50-041.jpg"
+    },
+    {
+      "url": "https://laptop88.vn/media/news/152_1.jpg"
+    },
+    {
+      "url": "https://laptop88.vn/media/news/1155_dsc02533.jpg"
+    },
+    {
+      "url": "https://fptshop.com.vn/uploads/originals/2016/1/11//635881275793247083_FPTShop-DaLat2.jpg"
+    },
+    {
+      "url": "https://cafefcdn.com/203337114487263232/2023/1/14/photo-1-16737081289551047491123.jpg"
+    },
+    {
+      "url": "https://cafefcdn.com/thumb_w/640/203337114487263232/2023/4/17/avatar1681690320243-16816903212951009358505.png"
+    },
+    {
+      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeZJrzT8F4m-7Z2qZ1RzQ9bBcBHVDJfi2w5Q&usqp=CAU"
+    },
+    {
+      "url": "https://fptshop.com.vn/uploads/originals/2016/2/27//635921650660919288_Xom-noi-01.JPG"
+    },
+    {
+      "url": "hhttps://cdn.sforum.vn/sforum/wp-content/uploads/2021/04/CellphoneS-giam-gia-face.jpg"
+    },
+    {
+      "url": "https://cdn.sforum.vn/sforum/wp-content/uploads/2021/12/TT-Laptop-Smarthome-CellphoneS-0.jpg"
+    }
+  ],
+  "productImage": [
+    {
+      "url": "https://laptopworld.vn/media/product/250_15367_dell_vostro_15_3530__logo.jpg"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_1__3_19.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/7/e/7efbd23a-5394-4002-9d67-8fad17c18121.jpg"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/l/a/laptop-dell-latitude-7320-9ppwv.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_5_43.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_6_9.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_3__1_71.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_6__152.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_d_i_2_3.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_d_i_2_3.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/l/a/laptop-dell-vostro-3520-i5-1235u-8gb-512gb.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/l/a/laptop-dell-inspiron-5425_5_.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/2/5/25_1_95.jpg"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_d_i_1__2.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/1/_/1_85.jpg"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/2/9/29_2_38.jpg"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_1__1_120.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/l/a/laptop-asus-tuf-gaming-f15-fx506hf-hn014w.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/n/4/n4020.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/a/s/asus_i9.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_8__1_98.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/l/a/laptop-asus-vivobook-14x-oled-s3405va-km071w-1.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/a/s/asus_x515ma-br481w.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_10__2_80.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_29__15.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/5/h/5h03_1.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_16__3_2.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_d_i_5__1.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_1__2_36.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/2/_/2.12_1.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_21__26.png"
+    },
+    {
+      "url": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:80/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_d_i_3_5.png"
+    }
+  ],
+  "mpduleDetail": []
+}

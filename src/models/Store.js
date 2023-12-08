@@ -54,24 +54,12 @@ const Product = new Schema({
   images: [ImageSchema],
   moduless: [ModulessSchema],
 });
-const setRating = (StoreSchema) => {
-  const reviews = StoreSchema?.reviews;
-  let rating = 0;
-  reviews?.forEach((review) => {
-    rating += review?.rating;
-  });
-  rating /= reviews?.length;
-  return rating;
-};
 const StoreSchema = new Schema({
   id: { type: Number },
   name: { type: String },
   address: { type: String },
   description: { type: String },
-  rating: {
-    type: Number,
-    default: setRating(this),
-  },
+  rating: {type: Number},
   updated_at: { type: Date, default: Date.now },
   created_at: { type: Date, default: Date.now },
   products: [Product],
