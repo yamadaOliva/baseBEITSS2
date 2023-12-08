@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 
 const ModuleDetailSchema = new Schema({
-  id: { type: Number},
+  id: { type: Number },
   name: { type: String },
   description: { type: String },
   moduleId: { type: Number },
@@ -23,7 +23,7 @@ const ImageSchema = new Schema({
   created_at: { type: Date },
 });
 const ReactionSchema = new Schema({
-  id: { type: Number},
+  id: { type: Number },
   user_id: { type: Number },
   review_id: { type: Number },
   type: { type: String },
@@ -31,7 +31,7 @@ const ReactionSchema = new Schema({
   created_at: { type: Date },
 });
 const ReviewSchema = new Schema({
-  id: { type: Number},
+  id: { type: Number },
   user_id: { type: Number },
   store_id: { type: Number },
   content: { type: String },
@@ -54,15 +54,26 @@ const Product = new Schema({
   images: [ImageSchema],
   moduless: [ModulessSchema],
 });
-
+const setRating = (StoreSchema) => {
+  const reviews = StoreSchema?.reviews;
+  let rating = 0;
+  reviews?.forEach((review) => {
+    rating += review?.rating;
+  });
+  rating /= reviews?.length;
+  return rating;
+};
 const StoreSchema = new Schema({
   id: { type: Number },
   name: { type: String },
   address: { type: String },
   description: { type: String },
-  rating: { type: Number },
-  updated_at: { type: Date },
-  created_at: { type: Date },
+  rating: {
+    type: Number,
+    default: setRating(this),
+  },
+  updated_at: { type: Date, default: Date.now },
+  created_at: { type: Date, default: Date.now },
   products: [Product],
   images: [ImageSchema],
   reviews: [ReviewSchema],
