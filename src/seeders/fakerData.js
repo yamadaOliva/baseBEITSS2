@@ -26,7 +26,7 @@ const seedUsers = async () => {
   }
   await User.insertMany(users);
 };
-const getNRandom = (arr,n) => {
+const getNRandom = (arr, n) => {
   const result = [];
   let tmp = [...arr];
   for (let i = 0; i < n; i++) {
@@ -48,16 +48,16 @@ const seedStores = async () => {
   let productImage = dataTest?.productImage;
   await Store.deleteMany();
   productData = productData.map((product) => {
-    product.images = getNRandom(productImage,2);
-    product.rating = 5;
+    product.images = getNRandom(productImage, 2);
     return product;
   });
   storeData = storeData.map((store) => {
-    store.images = getNRandom(storeImage,2);
-    store.products = getNRandom(productData,10);
+    store.images = getNRandom(storeImage, 2);
+    store.products = getNRandom(productData, 10);
+    store.rating = 5;
     return store;
   });
-  const stores = [];
+  console.log(storeData);
   await Store.insertMany(storeData);
 };
 const seedData = async () => {
