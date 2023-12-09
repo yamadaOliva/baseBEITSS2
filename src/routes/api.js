@@ -1,6 +1,6 @@
 import express from "express";
 import authController from "../controller/authController.js";
-import { getStoreController, getStoreDetailController } from "../controller/storeController.js";
+import { getStoreController, getStoreDetailController, getStoreByNameController } from "../controller/storeController.js";
 const router = express.Router();
 
 const initAPI = (app) => {
@@ -12,6 +12,7 @@ const initAPI = (app) => {
   router.post("/login", authController.loginController);
   router.get("/store/:id", getStoreDetailController);
   router.get("/store", getStoreController);
+  router.get("/store/search/:name", getStoreByNameController);
   return app.use("/api/v1", router);
 };
 

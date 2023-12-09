@@ -49,7 +49,25 @@ const getStoreDetail = async (id) => {
   }
 };
 
+const getStoreByName = async (name) => {
+  try {
+    const store = await Store.find({ name: { $regex: name, $options: "i" } });
+    return {
+      EC: 200,
+      data: store,
+      message: "Get store successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      EC: 400,
+      message: "Get store failed",
+      data: [],
+    };
+  }
+};
 module.exports = {
   getStore,
   getStoreDetail,
+  getStoreByName,
 };
