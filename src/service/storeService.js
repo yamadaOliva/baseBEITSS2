@@ -1,15 +1,26 @@
 import Store from "../models/Store.js";
 const getStore = async (limit, page) => {
   try {
-    const stores = await Store.find()
-      .skip((page-1) * limit)
-      .limit(limit);
-      console.log(stores);
-    return {
-      EC: 200,
-      data: stores,
-      message: "Get store successfully",
-    };
+    // use exec() to get a real Promise
+    try {
+      const result = await Store.find().limit(limit).skip(limit * page).exec();
+      const count = await Store.countDocuments().exec();
+      console.log("Count:", count);
+      return {
+        EC: 200,
+        data: result,
+        count: count,
+        message: "get store successfully",
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        EC: 400,
+        message: "Get store failed",
+        data: [],
+      };
+    }
+
   } catch (error) {
     console.log(error);
     return {
@@ -36,7 +47,7 @@ const getStoreDetail = async (id) => {
       data: [],
     };
   }
-}
+};
 
 module.exports = {
   getStore,
