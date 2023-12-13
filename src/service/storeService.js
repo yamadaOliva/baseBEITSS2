@@ -1,11 +1,36 @@
 import Store from "../models/Store.js";
-const getStore = async (limit, page) => {
+const getStore = async (params) => {
+  const { limit, page, search, name, rating, date, credibility } = params;
+  console.log(params);
   try {
     // use exec() to get a real Promise
     try {
-      const result = await Store.find().limit(limit).skip(limit * page).exec();
+      const sort = {
+        name: name === "ASC" ? -1 : 1,
+        rating: rating === "ASC" ? -1 : 1,
+        date: date === "ASC" ? -1 : 1,
+        credibility: credibility === "ASC" ? -1 : 1,
+      }
+      if (search) {
+        const result = await Store.find({
+          name: { $regex: search, $options: "i" },
+        })
+          .sort(sort)
+          .limit(limit).skip(limit * page).exec();
+        const count = await Store.find({
+          name: { $regex: search, $options: "i" },
+        }).countDocuments().exec();
+        return {
+          EC: 200,
+          data: result,
+          count: count,
+          message: "get store successfully",
+        };
+      }
+      const result = await Store.find()
+        .sort(sort)
+        .limit(limit).skip(limit * page).exec();
       const count = await Store.countDocuments().exec();
-      console.log("Count:", count);
       return {
         EC: 200,
         data: result,
@@ -74,16 +99,16 @@ const createCommentService = async (id, comment = {
 }) => {
   console.log(id, comment);
   try {
-    const store = await Store.find ({id: id});
-    if(store.reviews){
+    const store = await Store.find({ id: id });
+    if (store.reviews) {
       store.reviews.push(comment);
-      await Store.updateOne({id: id}, {reviews: store.reviews});
+      await Store.updateOne({ id: id }, { reviews: store.reviews });
     }
-    else{
+    else {
       store.reviews = [comment];
-      await Store.updateOne({id: id}, {reviews: store.reviews});
+      await Store.updateOne({ id: id }, { reviews: store.reviews });
     }
-    
+
     return {
       EC: 200,
       data: store,

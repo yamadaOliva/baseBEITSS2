@@ -1,7 +1,7 @@
 import { getStore, getStoreDetail, getStoreByName, createCommentService } from "../service/storeService.js";
 const getStoreController = async (req, res) => {
-  const { limit, page } = req.query;
-  const result = await getStore(limit, page);
+  const params = req.query;
+  const result = await getStore(params);
   return res.status(200).json(result);
 };
 
