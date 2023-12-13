@@ -26,6 +26,8 @@ const ReviewSchema = new Schema({
   content: { type: String },
   rating: { type: Number },
   reactions: [ReactionSchema],
+  likes: { type: Number, default: 0 },
+  dislikes: { type: Number, default: 0 },
   images: [ImageSchema],
 }, {timestamps: true });
 const Product = new Schema({

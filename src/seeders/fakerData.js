@@ -48,11 +48,11 @@ const seedStores = async () => {
   let productImage = dataTest?.productImage;
   await Store.deleteMany();
   productData = productData.map((product) => {
-    product.images = getNRandom(productImage, faker.number.between(5, 10));
+    product.images = getNRandom(productImage, 5+Math.floor(Math.random() * 5));
     return product;
   });
   storeData = storeData.map((store) => {
-    store.images = getNRandom(storeImage, faker.number.between(5, 10));
+    store.images = getNRandom(storeImage, 5+Math.floor(Math.random() * 5));
     store.products = getNRandom(productData, 10);
     store.rating = 5;
     return store;
@@ -66,6 +66,7 @@ const seedData = async () => {
   //read
   console.log("Seeding completed");
   await mongoose.disconnect();
+  process.exit(0);
 };
 export default seedData;
 // Run the following command to seed data:

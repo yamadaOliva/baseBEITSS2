@@ -1,4 +1,4 @@
-import { getStore, getStoreDetail, getStoreByName } from "../service/storeService.js";
+import { getStore, getStoreDetail, getStoreByName, createCommentService } from "../service/storeService.js";
 const getStoreController = async (req, res) => {
   const { limit, page } = req.query;
   const result = await getStore(limit, page);
@@ -18,8 +18,17 @@ const getStoreByNameController = async (req, res) => {
   return res.status(200).json(result);
 }
 
+const createCommentController = async (req, res) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+  console.log(req.body, id);
+  const result = await createCommentService(id, comment);
+  return res.status(200).json(result);
+}
+
 module.exports = {
   getStoreController,
   getStoreDetailController,
-  getStoreByNameController
+  getStoreByNameController,
+  createCommentController
 };

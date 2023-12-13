@@ -66,8 +66,41 @@ const getStoreByName = async (name) => {
     };
   }
 };
+
+const createCommentService = async (id, comment = {
+  user_id: "657982544331b25b94fbe9b9",
+  content: "content",
+  rating: 5,
+}) => {
+  console.log(id, comment);
+  try {
+    const store = await Store.find ({id: id});
+    if(store.reviews){
+      store.reviews.push(comment);
+      await Store.updateOne({id: id}, {reviews: store.reviews});
+    }
+    else{
+      store.reviews = [comment];
+      await Store.updateOne({id: id}, {reviews: store.reviews});
+    }
+    
+    return {
+      EC: 200,
+      data: store,
+      message: "Create comment successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      EC: 400,
+      message: "Create comment failed",
+      data: [],
+    };
+  }
+};
 module.exports = {
   getStore,
   getStoreDetail,
   getStoreByName,
+  createCommentService,
 };
