@@ -1,6 +1,13 @@
 import express from "express";
 import authController from "../controller/authController.js";
-import { getStoreController, getStoreDetailController, getStoreByNameController, createCommentController } from "../controller/storeController.js";
+import {
+  getStoreController,
+  getStoreDetailController,
+  getStoreByNameController,
+  createCommentController,
+  reactController,
+  getCommentController
+} from "../controller/storeController.js";
 const router = express.Router();
 
 const initAPI = (app) => {
@@ -14,6 +21,8 @@ const initAPI = (app) => {
   router.get("/store", getStoreController);
   router.get("/store/search/:name", getStoreByNameController);
   router.post("/store/comment/:id", createCommentController);
+  router.post("/store/comment/react/:id", reactController);
+  router.get("/store/comment/:id", getCommentController);
   return app.use("/api/v1", router);
 };
 

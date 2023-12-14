@@ -14,7 +14,7 @@ const seedUsers = async () => {
   // Delete all documents from Moduless collection
   await User.deleteMany();
   const users = [];
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 10; i++) {
     users.push({
       id: i,
       username: faker.internet.userName(),
