@@ -27,19 +27,9 @@ const ImageSchema = new Schema(
 const ReactionSchema = new Schema(
   {
     id: { type: Number },
-    user_id: { type: Schema.Types.ObjectId, ref: "User" },
+    user_id: { type: Number },
     type: { type: String },
-  },
-  { timestamps: true }
-);
-const SubCommentSchema = new Schema(
-  {
-    id: { type: Number },
-    user_id: { type: Number},
     content: { type: String },
-    likes: { type: Number, default: 0 },
-    dislikes: { type: Number, default: 0 },
-    reactions: [ReactionSchema],
   },
   { timestamps: true }
 );
@@ -54,7 +44,6 @@ const ReviewSchema = new Schema(
     likes: { type: Number, default: 0 },
     dislikes: { type: Number, default: 0 },
     images: [ImageSchema],
-    sub_comments: [SubCommentSchema],
   },
   { timestamps: true }
 );

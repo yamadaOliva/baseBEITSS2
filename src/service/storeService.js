@@ -101,22 +101,43 @@ const getStoreByName = async (name) => {
 const createCommentService = async (
   id,
   comment = {
-    user_id: "657982544331b25b94fbe9b9",
+    user_id: 0,
     content: "content",
     rating: 5,
   }
 ) => {
-  console.log(id, comment);
   try {
     const store = await Store.findOne({ id: id });
+    const user = store.reviews.find((review) => {
+      return +review.user_id === comment.user_id;
+    });
+    if (user) {
+      return {
+        EC: 400,
+        message: "Create comment failed",
+        data: [],
+      };
+    }
     if (store.reviews) {
       comment.id = store.reviews.length + 1;
       store.reviews.push(comment);
-      await Store.updateOne({ id: id }, { reviews: store.reviews });
+      let ptr = Math.ceil(
+        (+store.rating * (+store.reviews.length - 1) + +comment.rating) /
+          store.reviews.length
+      );
+      store.rating = ptr;
+      await Store.updateOne(
+        { id: id },
+        { reviews: store.reviews, rating: store.rating }
+      );
     } else {
       comment.id = 1;
       store.reviews = [comment];
-      await Store.updateOne({ id: id }, { reviews: store.reviews });
+      store.rating = comment.rating;
+      await Store.updateOne(
+        { id: id },
+        { reviews: store.reviews, rating: store.rating }
+      );
     }
 
     return {
@@ -142,17 +163,13 @@ const getNameUserById = async (id) => {
     console.log(error);
     return "test";
   }
-}
+};
 const getCommentService = async (id) => {
   try {
-    //comment have name populate user
-    console.log(id);
-    const store= await Store.findOne({ id: id });
+    const store = await Store.findOne({ id: id }).lean();
     let comments = store.reviews;
     for (let i = 0; i < comments.length; i++) {
-      let ptr= await getNameUserById(comments[i].user_id);
-      comments[i].username = ptr;
-      console.log(comments[i].username);
+      comments[i].username = await getNameUserById(comments[i].user_id);
     }
     return {
       EC: 200,
@@ -173,15 +190,52 @@ const reactService = async (
   store_id = 1,
   review_id = 1,
   reaction = {
-    user_id: "657982544331b25b94fbe9b9",
+    user_id: 1,
+    content: "content",
     type: "LIKE",
   }
 ) => {
   console.log(store_id, review_id, reaction);
-  const store = await Store.findOne({ id: store_id});
+  const store = await Store.findOne({ id: store_id });
   const comment = store.reviews.find((review) => review.id === review_id);
+  const user = comment.reactions.find((reactionA) => {
+    console.log(reaction.user_id, reaction.user_id);
+    return reactionA.user_id === reaction.user_id;
+  });
+  console.log(user);
+  if (user) {
+    if (user.type === reaction.type) {
+      return {
+        EC: 400,
+        message: "React failed",
+        data: [],
+      };
+    }
+    user.type = reaction.type;
+    user.content = reaction.content;
+    if (reaction.type === "LIKE") {
+      comment.likes++;
+      comment.dislikes--;
+    } else {
+      comment.likes--;
+      comment.dislikes++;
+    }
+    await Store.updateOne({ id: store_id }, { reviews: store.reviews });
+    return {
+      EC: 200,
+      message: "React successfully",
+      data: [],
+    };
+  }
+  reaction.id = comment.reactions.length + 1;
+  comment.reactions.push(reaction);
+  if (reaction.type === "LIKE") {
+    comment.likes++;
+  } else {
+    comment.dislikes++;
+  }
+  await Store.updateOne({ id: store_id }, { reviews: store.reviews });
   console.log(comment);
-
 };
 
 module.exports = {

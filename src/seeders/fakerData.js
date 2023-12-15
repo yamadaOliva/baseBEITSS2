@@ -54,7 +54,7 @@ const seedStores = async () => {
   storeData = storeData.map((store) => {
     store.images = getNRandom(storeImage, 5+Math.floor(Math.random() * 5));
     store.products = getNRandom(productData, 10);
-    store.rating = 5;
+    store.rating = 0;
     return store;
   });
   console.log(storeData);

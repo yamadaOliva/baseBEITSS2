@@ -20,7 +20,6 @@ const getStoreDetailController = async (req, res) => {
 
 const getStoreByNameController = async (req, res) => {
   const { name } = req.params;
-  console.log(req.params);
   const result = await getStoreByName(name);
   return res.status(200).json(result);
 };
@@ -35,7 +34,6 @@ const createCommentController = async (req, res) => {
 
 const reactController = async (req, res) => {
   const id  = req.params;
-  console.log(id);
   const react = req.body;
   const result = await reactService();
   return res.status(200).json(result);
@@ -43,7 +41,6 @@ const reactController = async (req, res) => {
 
 const getCommentController = async (req, res) => {
   const {id}  = req.params;
-  console.log(id);
   const result = await getCommentService(id);
   return res.status(200).json(result);
 }
