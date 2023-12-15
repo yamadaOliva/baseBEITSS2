@@ -12,6 +12,18 @@ mongoose.connect(
 );
 const seedUsers = async () => {
   // Delete all documents from Moduless collection
+  const namesVietnamese = [
+    "Nguyễn Văn An",
+    "Trần Thị Bình",
+    "Lê Văn Cường",
+    "Phạm Thị Dung",
+    "Hoàng Văn Duy",
+    "Nguyễn Thị Hà",
+    "Vũ Văn Hải",
+    "Lê Thị Hường",
+    "Đặng Văn Minh",
+    "Nguyễn Thị Kiều"
+  ];
   await User.deleteMany();
   const users = [];
   for (let i = 0; i < 10; i++) {
@@ -20,8 +32,9 @@ const seedUsers = async () => {
       username: faker.internet.userName(),
       email: faker.internet.email(),
       password: "123456",
-      fullname: faker.person.fullName(),
-      role: Math.floor(Math.random() * 2),
+      fullname: namesVietnamese[i],
+      role: 1,
+      avatar: faker.image.avatar(),
     });
   }
   await User.insertMany(users);
@@ -62,6 +75,14 @@ const seedStores = async () => {
       content: content[Math.floor(Math.random() * 5)],
     });
   }
+  
+  const fs = require("fs");
+  const data = fs.readFileSync("./src/seeders/store.json", "utf8");
+  const dataTest = JSON.parse(data);
+  let storeData = dataTest?.store;
+  let productData = dataTest?.product;
+  let storeImage = dataTest?.storeImage;
+  let productImage = dataTest?.productImage;
   let reviewData = []; 
   for (let i = 0; i < 10; i++) {
     let reaction = getNRandom(reactionData, 5);
@@ -73,16 +94,9 @@ const seedStores = async () => {
       reactions: reaction,
       likes: reaction.filter((item) => item.type === "LIKE").length,
       dislikes: reaction.filter((item) => item.type === "DISLIKE").length,
-      images: [],
+      images: getNRandom(productImage, 3),
     });
   }
-  const fs = require("fs");
-  const data = fs.readFileSync("./src/seeders/store.json", "utf8");
-  const dataTest = JSON.parse(data);
-  let storeData = dataTest?.store;
-  let productData = dataTest?.product;
-  let storeImage = dataTest?.storeImage;
-  let productImage = dataTest?.productImage;
   await Store.deleteMany();
   productData = productData.map((product) => {
     product.images = getNRandom(productImage, 5+Math.floor(Math.random() * 5));

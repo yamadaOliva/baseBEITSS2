@@ -64,7 +64,7 @@ const getStore = async (params) => {
 
 const getStoreDetail = async (id) => {
   try {
-    const store = await Store.findById(id);
+    const store = await Store.findOne({ id: id });
     return {
       EC: 200,
       data: store,
