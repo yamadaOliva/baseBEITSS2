@@ -41,6 +41,18 @@ const seedStores = async () => {
   // Delete all documents from Moduless collection
   let content = ["hay", "tuyet", "tot", "xau", "binh thuong"];
   let type = ["LIKE", "DISLIKE"];
+  const compliments = [
+    "Cửa hàng này có những sản phẩm laptop chất lượng cao!",
+    "Dịch vụ tận tâm và chuyên nghiệp, tôi rất hài lòng!",
+    "Sự đa dạng về mẫu mã và thương hiệu laptop ở đây rất ấn tượng.",
+    "Nhân viên thân thiện và nhiệt tình, luôn sẵn sàng giúp đỡ khách hàng.",
+    "Không gian cửa hàng sạch sẽ và thoải mái, tạo cảm giác mua sắm dễ chịu.",
+    "Cửa hàng này luôn cập nhật những mẫu laptop mới nhất trên thị trường.",
+    "Giá cả ở đây hợp lý, đặc biệt là so với chất lượng sản phẩm.",
+    "Đã mua laptop ở đây và rất hài lòng với hiệu suất và tính năng.",
+    "Cửa hàng mang đến cho tôi trải nghiệm mua sắm laptop tuyệt vời.",
+    "Chắc chắn sẽ quay lại đây nếu cần nâng cấp hoặc mua laptop mới."
+  ];
   let reactionData = [];
   for (let i = 0; i <8; i++) {
     reactionData.push({
@@ -56,7 +68,7 @@ const seedStores = async () => {
     reviewData.push({
       id: i,
       user_id: i,
-      content: faker.lorem.paragraph(),
+      content: compliments[Math.floor(Math.random() * 10)],
       rating: Math.floor(Math.random() * 5),
       reactions: reaction,
       likes: reaction.filter((item) => item.type === "LIKE").length,
