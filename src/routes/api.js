@@ -6,7 +6,8 @@ import {
   getStoreByNameController,
   createCommentController,
   reactController,
-  getCommentController
+  getCommentController,
+  getListCommentByStoreIdController
 } from "../controller/storeController.js";
 const router = express.Router();
 
@@ -23,6 +24,7 @@ const initAPI = (app) => {
   router.post("/store/comment/:id", createCommentController);
   router.post("/store/comment/react/:id", reactController);
   router.get("/store/comment/:id", getCommentController);
+  router.get("/store/:id/comment", getListCommentByStoreIdController);
   return app.use("/api/v1", router);
 };
 

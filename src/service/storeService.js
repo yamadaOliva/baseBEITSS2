@@ -123,7 +123,7 @@ const createCommentService = async (
       store.reviews.push(comment);
       let ptr = Math.ceil(
         (+store.rating * (+store.reviews.length - 1) + +comment.rating) /
-          store.reviews.length
+        store.reviews.length
       );
       store.rating = ptr;
       await Store.updateOne(
@@ -238,6 +238,95 @@ const reactService = async (
   console.log(comment);
 };
 
+
+const formatReaction = async (reaction) => {
+  try {
+    const user = await User.findOne({ id: reaction.user_id });
+
+    const result = {
+      _id: reaction._id,
+      id: reaction.id,
+      user_id: reaction.user_id,
+      username: user.username,
+      avatar: user.avatar,
+      fullname: user.fullname,
+      content: reaction.content,
+      type: reaction.type,
+      createdAt: reaction.createdAt,
+      updatedAt: reaction.updateAt,
+    }
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+const formatComment = async (comment) => {
+  try {
+    const user = await User.findOne({ id: comment.user_id });
+
+    const reactions = await Promise.all(
+      comment?.reactions?.map(async (comment) => {
+        return await formatReaction(comment)
+      }));
+
+    const result = {
+      id: comment.id,
+      user_id: comment.user_id,
+      username: user.username,
+      username: user.username,
+      avatar: user.avatar,
+      fullname: user.fullname,
+      images: comment.images,
+      content: comment.content,
+      rating: comment.rating,
+      likes: comment.likes,
+      dislikes: comment.dislikes,
+      date: comment.date,
+      reactions,
+      createdAt: comment.createdAt,
+      updatedAt: comment.updateAt,
+    }
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+const getListCommentByStoreIdService = async (id) => {
+  try {
+    const store = await Store.findById(id).lean();
+
+    const comments = await Promise.all(
+      store?.reviews?.map(async (comment) => {
+        return await formatComment(comment)
+      }));
+
+    const result = {
+      _id: store._id,
+      id: store.id,
+      name: store.name,
+      address: store.address,
+      rating: store.rating,
+      images: store.images,
+      comments,
+    }
+
+    return {
+      EC: 200,
+      data: result,
+      message: "Get store successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      EC: 400,
+      message: "Get store failed",
+      data: [],
+    };
+  }
+}
+
 module.exports = {
   getStore,
   getStoreDetail,
@@ -245,4 +334,5 @@ module.exports = {
   createCommentService,
   getCommentService,
   reactService,
+  getListCommentByStoreIdService
 };

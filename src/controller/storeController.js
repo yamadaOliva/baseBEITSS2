@@ -5,6 +5,7 @@ import {
   createCommentService,
   reactService,
   getCommentService,
+  getListCommentByStoreIdService
 } from "../service/storeService.js";
 const getStoreController = async (req, res) => {
   const params = req.query;
@@ -33,17 +34,24 @@ const createCommentController = async (req, res) => {
 };
 
 const reactController = async (req, res) => {
-  const id  = req.params;
+  const id = req.params;
   const react = req.body;
   const result = await reactService();
   return res.status(200).json(result);
 };
 
 const getCommentController = async (req, res) => {
-  const {id}  = req.params;
+  const { id } = req.params;
   const result = await getCommentService(id);
   return res.status(200).json(result);
 }
+
+const getListCommentByStoreIdController = async (req, res) => {
+  const { id } = req.params;
+  const result = await getListCommentByStoreIdService(id);
+  return res.status(200).json(result);
+}
+
 module.exports = {
   getStoreController,
   getStoreDetailController,
@@ -51,4 +59,5 @@ module.exports = {
   createCommentController,
   reactController,
   getCommentController,
+  getListCommentByStoreIdController
 };
