@@ -173,7 +173,7 @@ const getAvatarUserById = async (id) => {
     return "test";
   }
 };
-    
+
 const getCommentService = async (id) => {
   try {
     const store = await Store.findOne({ id: id }).lean();
@@ -308,7 +308,7 @@ const formatComment = async (comment) => {
 
 const getListCommentByStoreIdService = async (id) => {
   try {
-    const store = await Store.findById(id).lean();
+    const store = await Store.findOne({ id: id }).lean();
 
     const comments = await Promise.all(
       store?.reviews?.map(async (comment) => {
