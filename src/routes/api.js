@@ -21,7 +21,7 @@ const initAPI = (app) => {
   router.get("/store/:id", getStoreDetailController);
   router.get("/store", getStoreController);
   router.get("/store/search/:name", getStoreByNameController);
-  router.post("/store/comment/:id", createCommentController);
+  router.post("/store/:id/comment", createCommentController);
   router.post("/store/comment/react/:id", reactController);
   router.get("/store/comment/:id", getCommentController);
   router.get("/store/:id/comment", getListCommentByStoreIdController);

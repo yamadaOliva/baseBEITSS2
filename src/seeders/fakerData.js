@@ -30,7 +30,7 @@ const seedUsers = async () => {
     users.push({
       id: i,
       username: faker.internet.userName(),
-      email: faker.internet.email(),
+      email: 'user' + i + "@gmail.com",
       password: "123456",
       fullname: namesVietnamese[i],
       role: 1,
