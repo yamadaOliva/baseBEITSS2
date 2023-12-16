@@ -5,22 +5,37 @@ const path = require("path");
 
 dotenv.config();
 const getStore = async (params) => {
-  const { limit, page, search, name, rating, date, credibility } = params;
-  console.log(params);
-  // use exec() to get a real Promise
+  const {
+    limit,
+    page,
+    search,
+  } = params;
+  const ratingAz = params.ratingAz === 'true'
+  const ratingZa = params.ratingZa === 'true'
+  const credibilityAz = params.credibilityAz === 'true'
+  const credibilityZa = params.credibilityZa === 'true'
+  const sort = {};
+  if (ratingAz) {
+    sort.rating = 1;
+  }
+  if (ratingZa) {
+    sort.rating = -1;
+  }
+  if (credibilityAz) {
+    sort.creditibility = 1;
+  }
+  if (credibilityZa) {
+    sort.creditibility = -1;
+  }
   try {
-    //await updateCreditibility();
-    const sort = {
-      name: name === "ASC" ? -1 : 1,
-      rating: rating === "ASC" ? -1 : 1,
-      date: date === "ASC" ? -1 : 1,
-      credibility: credibility === "ASC" ? -1 : 1,
-    };
     if (search) {
       const result = await Store.find({
         name: { $regex: search, $options: "i" },
       })
-        .sort(sort)
+        .sort({
+          ...sort,
+          name: 1,
+        })
         .limit(limit)
         .skip(limit * page)
         .exec();
@@ -36,12 +51,20 @@ const getStore = async (params) => {
         message: "get store successfully",
       };
     }
+
     const result = await Store.find()
-      .sort(sort)
+      .sort({
+        ...sort,
+        name: 1,
+      })
       .limit(limit)
       .skip(limit * page)
       .exec();
-    const count = await Store.countDocuments().exec();
+    const count = await Store.find({
+      name: { $regex: search, $options: "i" },
+    })
+      .countDocuments()
+      .exec();
     return {
       EC: 200,
       data: result,
