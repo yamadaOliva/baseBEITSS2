@@ -73,6 +73,7 @@ const loginService = async (user) => {
           fullname: userTemp.fullname,
           avatar: userTemp.avatar,
           id: userTemp.id,
+          _id: userTemp._id,
         },
       };
     }

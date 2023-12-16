@@ -1,5 +1,7 @@
 import Store from "../models/Store.js";
 import User from "../models/User.js";
+import { sendNotification } from "./socket.js";
+import { createNotification } from "./notificationService.js";
 const dotenv = require("dotenv");
 const path = require("path");
 
@@ -285,6 +287,7 @@ const reactService = async (
   reaction.username = await getNameUserById(reaction.user_id);
   reaction.avatar = await getAvatarUserById(reaction.user_id);
   comment.reactions.push(reaction);
+  const sender = await User.findOne({ id: reaction.user_id });
   if (reaction.type === "LIKE") {
     comment.likes++;
   } else {
@@ -302,9 +305,9 @@ const formatReaction = async (reaction) => {
       _id: reaction._id,
       id: reaction.id,
       user_id: reaction.user_id,
-      username: user.username,
-      avatar: user.avatar,
-      fullname: user.fullname,
+      // username: user.username,
+      // avatar: user.avatar,
+      // fullname: user.fullname,
       content: reaction.content,
       type: reaction.type,
       createdAt: reaction.date,
@@ -409,10 +412,17 @@ const createReactionService = async (storeId, reviewId, reaction) => {
         break;
     }
     reaction.id = comment.reactions.length + 1;
-    reaction.username = user.username;
-    reaction.avatar = user.avatar;
     reaction.date = new Date();
     comment.reactions.push(reaction);
+    const recipient = await User.findOne({ id: comment.user_id });
+    const notification = await createNotification({
+      recipient: recipient._id,
+      sender: user ? user._id : null,
+      message: `Đã ${(reaction.type).toString().toLowerCase()} bình luận của bạn: ${reaction.content}`,
+      store: store._id,
+    });
+    
+    sendNotification(notification)
     await Store.updateOne({ id: storeId }, { reviews: store.reviews });
     let formatedComment = await formatComment(comment);
     return {

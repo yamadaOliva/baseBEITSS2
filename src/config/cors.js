@@ -5,6 +5,7 @@ const configCors = (app) => {
         const allowedOrigins = [
             process.env.PORT_REACT,
             'https://ii-shop-itss.vercel.app',
+            'http://localhost:3000'
             // Add more allowed origins as needed
         ];
 

@@ -10,6 +10,7 @@ import {
   getListCommentByStoreIdController,
   createReactionController,
 } from "../controller/storeController.js";
+import { getNotificationsController } from '../controller/notificationController.js'
 const router = express.Router();
 
 const initAPI = (app) => {
@@ -26,6 +27,7 @@ const initAPI = (app) => {
   router.post("/store/comment/react/:id", reactController);
   router.get("/store/comment/:id", getCommentController);
   router.get("/store/:id/comment", getListCommentByStoreIdController);
+  router.get("/notification", getNotificationsController)
   router.post(
     "/store/:storeId/comment/:commentId/reaction",
     createReactionController
