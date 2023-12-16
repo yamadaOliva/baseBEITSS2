@@ -80,6 +80,8 @@ const StoreSchema = new Schema(
     products: [Product],
     images: [ImageSchema],
     reviews: [ReviewSchema],
+    date: { type: Date },
+    creditibility: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

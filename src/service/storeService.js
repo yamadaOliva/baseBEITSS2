@@ -7,62 +7,77 @@ dotenv.config();
 const getStore = async (params) => {
   const { limit, page, search, name, rating, date, credibility } = params;
   console.log(params);
+  // use exec() to get a real Promise
   try {
-    // use exec() to get a real Promise
-    try {
-      const sort = {
-        name: name === "ASC" ? -1 : 1,
-        rating: rating === "ASC" ? -1 : 1,
-        date: date === "ASC" ? -1 : 1,
-        credibility: credibility === "ASC" ? -1 : 1,
-      };
-      if (search) {
-        const result = await Store.find({
-          name: { $regex: search, $options: "i" },
-        })
-          .sort(sort)
-          .limit(limit)
-          .skip(limit * page)
-          .exec();
-        const count = await Store.find({
-          name: { $regex: search, $options: "i" },
-        })
-          .countDocuments()
-          .exec();
-        return {
-          EC: 200,
-          data: result,
-          count: count,
-          message: "get store successfully",
-        };
-      }
-      const result = await Store.find()
+    //await updateCreditibility();
+    const sort = {
+      name: name === "ASC" ? -1 : 1,
+      rating: rating === "ASC" ? -1 : 1,
+      date: date === "ASC" ? -1 : 1,
+      credibility: credibility === "ASC" ? -1 : 1,
+    };
+    if (search) {
+      const result = await Store.find({
+        name: { $regex: search, $options: "i" },
+      })
         .sort(sort)
         .limit(limit)
         .skip(limit * page)
         .exec();
-      const count = await Store.countDocuments().exec();
+      const count = await Store.find({
+        name: { $regex: search, $options: "i" },
+      })
+        .countDocuments()
+        .exec();
       return {
         EC: 200,
         data: result,
         count: count,
         message: "get store successfully",
       };
-    } catch (error) {
-      console.error(error);
-      return {
-        EC: 400,
-        message: "Get store failed",
-        data: [],
-      };
     }
+    const result = await Store.find()
+      .sort(sort)
+      .limit(limit)
+      .skip(limit * page)
+      .exec();
+    const count = await Store.countDocuments().exec();
+    return {
+      EC: 200,
+      data: result,
+      count: count,
+      message: "get store successfully",
+    };
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return {
       EC: 400,
       message: "Get store failed",
       data: [],
     };
+  }
+};
+
+const updateCreditibility = async () => {
+  try {
+    const stores = await Store.find();
+
+    const bulkOps = stores.map((store) => {
+      const creditibility =
+        parseFloat(store.rating) * store.reviews.length + store.reviews.length;
+      console.log(creditibility);
+      return {
+        updateOne: {
+          filter: { _id: store._id },
+          update: { creditibility: creditibility },
+        },
+      };
+    });
+
+    await Store.bulkWrite(bulkOps);
+    console.log("Creditibility updated successfully.");
+  } catch (error) {
+    console.error("Error updating creditibility:", error);
   }
 };
 
@@ -136,7 +151,13 @@ const createCommentService = async (id, comment) => {
     );
     console.log("result", result);
     if (result.modifiedCount === 1) {
-      await Store.updateOne({ id: id }, { rating: ptr });
+      let store = await Store.findOne({ id: id });
+      const creditibility =
+        parseFloat(ptr) * store.reviews.length + store.reviews.length;
+      await Store.updateOne(
+        { id: id },
+        { rating: ptr, creditibility: creditibility }
+      );
     } else throw new Error("Create comment failed");
 
     return {
