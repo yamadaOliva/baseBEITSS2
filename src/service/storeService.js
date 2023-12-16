@@ -1,5 +1,9 @@
 import Store from "../models/Store.js";
 import User from "../models/User.js";
+const dotenv = require("dotenv");
+const path = require("path");
+
+dotenv.config();
 const getStore = async (params) => {
   const { limit, page, search, name, rating, date, credibility } = params;
   console.log(params);
@@ -98,51 +102,46 @@ const getStoreByName = async (name) => {
   }
 };
 
-const createCommentService = async (
-  id,
-  comment = {
-    user_id: 0,
-    content: "content",
-    rating: 5,
-  }
-) => {
+const createCommentService = async (id, comment) => {
   try {
     const store = await Store.findOne({ id: id });
-    const user = store.reviews.find((review) => {
-      return +review.user_id === comment.user_id;
-    });
-    if (user) {
+    // const user = store.reviews.find((review) => {
+    //   return +review.user_id === comment.user_id;
+    // });
+    // if (user) {
+    //   return {
+    //     EC: 400,
+    //     message: "Create comment failed because user has commented",
+    //     data: [],
+    //   };
+    // }
+    let images = comment.images.map((image) => {
       return {
-        EC: 400,
-        message: "Create comment failed",
-        data: [],
+        url: image,
       };
-    }
-    if (store.reviews) {
-      comment.id = store.reviews.length + 1;
-      store.reviews.push(comment);
-      let ptr = Math.ceil(
-        (+store.rating * (+store.reviews.length - 1) + +comment.rating) /
-        store.reviews.length
-      );
-      store.rating = ptr;
-      await Store.updateOne(
-        { id: id },
-        { reviews: store.reviews, rating: store.rating }
-      );
-    } else {
-      comment.id = 1;
-      store.reviews = [comment];
-      store.rating = comment.rating;
-      await Store.updateOne(
-        { id: id },
-        { reviews: store.reviews, rating: store.rating }
-      );
-    }
+    });
+    comment.id = store.reviews.length + 1;
+    comment.images = images;
+    comment.date = new Date();
+    console.log("comment", comment);
+    let ptr = store.rating;
+    ptr = (
+      (ptr * store.reviews.length + Number.parseFloat(comment.rating)) /
+      (store.reviews.length + 1)
+    ).toFixed(1);
+
+    const result = await Store.updateOne(
+      { id: id },
+      { $push: { reviews: comment } }
+    );
+    console.log("result", result);
+    if (result.modifiedCount === 1) {
+      await Store.updateOne({ id: id }, { rating: ptr });
+    } else throw new Error("Create comment failed");
 
     return {
       EC: 200,
-      data: store,
+      data: [],
       message: "Create comment successfully",
     };
   } catch (error) {
@@ -251,7 +250,6 @@ const reactService = async (
   console.log(comment);
 };
 
-
 const formatReaction = async (reaction) => {
   try {
     const user = await User.findOne({ id: reaction.user_id });
@@ -265,14 +263,14 @@ const formatReaction = async (reaction) => {
       fullname: user.fullname,
       content: reaction.content,
       type: reaction.type,
-      createdAt: reaction.createdAt,
+      createdAt: reaction.date,
       updatedAt: reaction.updateAt,
-    }
+    };
     return result;
   } catch (error) {
     throw error;
   }
-}
+};
 
 const formatComment = async (comment) => {
   try {
@@ -280,13 +278,13 @@ const formatComment = async (comment) => {
 
     const reactions = await Promise.all(
       comment?.reactions?.map(async (comment) => {
-        return await formatReaction(comment)
-      }));
+        return await formatReaction(comment);
+      })
+    );
 
     const result = {
       id: comment.id,
       user_id: comment.user_id,
-      username: user.username,
       username: user.username,
       avatar: user.avatar,
       fullname: user.fullname,
@@ -295,25 +293,30 @@ const formatComment = async (comment) => {
       rating: comment.rating,
       likes: comment.likes,
       dislikes: comment.dislikes,
-      date: comment.date,
+      feedbacks: comment.feedbacks,
       reactions,
-      createdAt: comment.createdAt,
+      createdAt: comment.date,
       updatedAt: comment.updateAt,
-    }
+    };
     return result;
   } catch (error) {
     throw error;
   }
-}
+};
 
 const getListCommentByStoreIdService = async (id) => {
   try {
     const store = await Store.findOne({ id: id }).lean();
 
-    const comments = await Promise.all(
+    let comments = await Promise.all(
       store?.reviews?.map(async (comment) => {
-        return await formatComment(comment)
-      }));
+        return await formatComment(comment);
+      })
+    );
+
+    comments = comments.sort((a, b) => {
+      return b.createdAt - a.createdAt;
+    });
 
     const result = {
       _id: store._id,
@@ -323,7 +326,7 @@ const getListCommentByStoreIdService = async (id) => {
       rating: store.rating,
       images: store.images,
       comments,
-    }
+    };
 
     return {
       EC: 200,
@@ -338,8 +341,50 @@ const getListCommentByStoreIdService = async (id) => {
       data: [],
     };
   }
-}
+};
 
+const createReactionService = async (storeId, reviewId, reaction) => {
+  try {
+    const store = await Store.findOne({ id: storeId });
+    const comment = store.reviews.find(
+      (review) => review.id === Number.parseInt(reviewId)
+    );
+    const user = await User.findOne({ id: reaction.user_id });
+    reaction.date = new Date();
+    switch (reaction.type) {
+      case "LIKE":
+        comment.likes++;
+        break;
+      case "DISLIKE":
+        comment.dislikes++;
+        break;
+      case "FEEDBACK":
+        comment.feedbacks++;
+        break;
+      default:
+        break;
+    }
+    reaction.id = comment.reactions.length + 1;
+    reaction.username = user.username;
+    reaction.avatar = user.avatar;
+    reaction.date = new Date();
+    comment.reactions.push(reaction);
+    await Store.updateOne({ id: storeId }, { reviews: store.reviews });
+    let formatedComment = await formatComment(comment);
+    return {
+      EC: 200,
+      message: "Create reaction successfully",
+      data: formatedComment,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      EC: 400,
+      message: "Create reaction failed",
+      data: [],
+    };
+  }
+};
 module.exports = {
   getStore,
   getStoreDetail,
@@ -347,5 +392,6 @@ module.exports = {
   createCommentService,
   getCommentService,
   reactService,
-  getListCommentByStoreIdService
+  getListCommentByStoreIdService,
+  createReactionService,
 };
