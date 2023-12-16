@@ -1,7 +1,4 @@
 const socketIO = require('socket.io');
-const { createNotification } = require('./notificationService');
-const EventEmitter = require('events');
-const eventEmitter = new EventEmitter();
 
 let io;
 function initializeSocket(server) {
