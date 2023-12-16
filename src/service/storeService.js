@@ -164,12 +164,23 @@ const getNameUserById = async (id) => {
     return "test";
   }
 };
+const getAvatarUserById = async (id) => {
+  try {
+    const user = await User.findOne({ id: id });
+    return user?.avatar;
+  } catch (error) {
+    console.log(error);
+    return "test";
+  }
+};
+    
 const getCommentService = async (id) => {
   try {
     const store = await Store.findOne({ id: id }).lean();
     let comments = store.reviews;
     for (let i = 0; i < comments.length; i++) {
       comments[i].username = await getNameUserById(comments[i].user_id);
+      comments[i].avatar = await getAvatarUserById(comments[i].user_id);
     }
     return {
       EC: 200,
@@ -228,6 +239,8 @@ const reactService = async (
     };
   }
   reaction.id = comment.reactions.length + 1;
+  reaction.username = await getNameUserById(reaction.user_id);
+  reaction.avatar = await getAvatarUserById(reaction.user_id);
   comment.reactions.push(reaction);
   if (reaction.type === "LIKE") {
     comment.likes++;

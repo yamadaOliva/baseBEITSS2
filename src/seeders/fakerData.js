@@ -106,7 +106,7 @@ const seedStores = async () => {
     store.images = getNRandom(storeImage, 5+Math.floor(Math.random() * 5));
     store.products = getNRandom(productData, 10);
     store.reviews = getNRandom(reviewData, 5);
-    store.rating = 0;
+    store.rating = store.reviews.reduce((acc, cur) => acc + cur.rating, 0) / store.reviews.length;
     return store;
   });
   console.log(storeData);

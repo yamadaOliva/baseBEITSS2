@@ -30,6 +30,8 @@ const ReactionSchema = new Schema(
     user_id: { type: Number },
     type: { type: String },
     content: { type: String },
+    username: { type: String },
+    avatar: { type: String },
   },
   { timestamps: true }
 );
