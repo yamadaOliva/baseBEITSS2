@@ -1,21 +1,17 @@
 const socketIO = require('socket.io');
 const { createNotification } = require('./notificationService');
+const EventEmitter = require('events');
+const eventEmitter = new EventEmitter();
 
 let io;
 function initializeSocket(server) {
   io = socketIO(server, {cors: {origin: "*"}});
   
-  io.on('connection', (socket) => {
-    socket.on('sendNotification', async (data) => {
-      const notification = await createNotification(data);
-      
-      io.emit('newNotification', notification)
-    })
-  });
+  io.on('connection', (socket) => {});
 }
 
-function getSocket() {
-  return io;
+function sendNotification(data) {
+  return io.emit('newNotification', data);
 }
 
-module.exports = {initializeSocket, getSocket};
+module.exports = {initializeSocket, sendNotification};

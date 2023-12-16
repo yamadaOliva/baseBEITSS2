@@ -28,8 +28,11 @@ const ReactionSchema = new Schema(
   {
     id: { type: Number },
     user_id: { type: Number },
-    type: { type: String },
+    type: { type: String, enum: ["LIKE", "DISLIKE", "FEEDBACK"] },
     content: { type: String },
+    username: { type: String },
+    avatar: { type: String },
+    date: { type: Date },
   },
   { timestamps: true }
 );
@@ -43,9 +46,13 @@ const ReviewSchema = new Schema(
     reactions: [ReactionSchema],
     likes: { type: Number, default: 0 },
     dislikes: { type: Number, default: 0 },
+    feedbacks: { type: Number, default: 0 },
     images: [ImageSchema],
+    date: { type: Date },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 const Product = new Schema(
   {
