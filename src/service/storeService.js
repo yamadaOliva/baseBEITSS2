@@ -1,5 +1,6 @@
 import Store from "../models/Store.js";
 import User from "../models/User.js";
+import { getSocket } from "./socket.js";
 const getStore = async (params) => {
   const { limit, page, search, name, rating, date, credibility } = params;
   console.log(params);
@@ -229,6 +230,13 @@ const reactService = async (
   }
   reaction.id = comment.reactions.length + 1;
   comment.reactions.push(reaction);
+  const sender = await User.findOne({ id: reaction.user_id });
+  getSocket().emit('sendNotification', {
+    recipient: comment._id,
+    sender: sender._id || null,
+    message: `Da ${reaction.type} binh luan cua ban`,
+    store: store._id,
+  });
   if (reaction.type === "LIKE") {
     comment.likes++;
   } else {
