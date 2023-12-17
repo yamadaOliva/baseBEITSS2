@@ -54,7 +54,18 @@ const getNRandom = (arr, n) => {
 
 const seedStores = async () => {
   // Delete all documents from Moduless collection
-  let content = ["hay", "tuyet", "tot", "xau", "binh thuong"];
+  let content = [
+    "Tuyệt vời!",
+    "Rất tốt!",
+    "Tốt!",
+    "Bình thường!",
+    "Tệ!",
+    "Rất tệ!",
+    "Hài lòng!",
+    "Không hài lòng!",
+    "Tôi rất hài lòng!",
+    "Rất uy tín",
+  ];
   let type = ["LIKE", "DISLIKE", "FEEDBACK"];
   const compliments = [
     "Cửa hàng này có những sản phẩm laptop chất lượng cao!",
@@ -78,6 +89,45 @@ const seedStores = async () => {
       date: faker.date.past(),
     });
   }
+  const seedReactions = () => {
+    let reactions = [];
+    let count = faker.helpers.arrayElement([1, 2, 3, 4, 5]);
+    for (let i = 0; i < count; i++) {
+      reactions.push({
+        id: i,
+        user_id: faker.helpers.arrayElement([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+        type: faker.helpers.arrayElement(["LIKE", "DISLIKE", "FEEDBACK"]),
+        content: content[Math.floor(Math.random() * 5)],
+        date: faker.date.past(),
+      });
+    }
+    return reactions;
+  };
+
+  const seedReviews = () => {
+    let reviews = [];
+    let count = faker.helpers.arrayElement([
+      3, 4, 5, 5, 6, 6, 6, 7, 7, 8, 9, 10,
+    ]);
+    for (let i = 0; i < count; i++) {
+      let reaction = seedReactions();
+      reviews.push({
+        id: i,
+        user_id: faker.helpers.arrayElement([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]),
+        content: compliments[Math.floor(Math.random() * 10)],
+        rating: faker.helpers.arrayElement([
+          0, 1, 2, 3, 3, 4, 5, 4, 5, 5, 5, 4,
+        ]),
+        reactions: reaction,
+        likes: reaction.filter((item) => item.type === "LIKE").length,
+        dislikes: reaction.filter((item) => item.type === "DISLIKE").length,
+        feedbacks: reaction.filter((item) => item.type === "FEEDBACK").length,
+        images: getNRandom(productImage, 3),
+        date: faker.date.past(),
+      });
+    }
+    return reviews;
+  };
 
   const fs = require("fs");
   const data = fs.readFileSync("./src/seeders/store.json", "utf8");
@@ -102,6 +152,7 @@ const seedStores = async () => {
       date: faker.date.past(),
     });
   }
+
   await Store.deleteMany();
   productData = productData.map((product) => {
     product.images = getNRandom(
@@ -113,15 +164,15 @@ const seedStores = async () => {
   storeData = storeData.map((store) => {
     store.images = getNRandom(storeImage, 5 + Math.floor(Math.random() * 5));
     store.products = getNRandom(productData, 10);
-    store.reviews = getNRandom(reviewData, 10);
+    store.reviews = seedReviews();
     store.date = faker.date.past();
-    store.rating =
+    store.rating = Math.round(
       store.reviews.reduce((acc, cur) => acc + cur.rating, 0) /
-      store.reviews.length;
-    store.credibility = Math.floor(
-      Number.parseFloat(
-        store.rating * store.reviews.length + store.reviews.length
-      )
+        store.reviews.length
+    );
+    store.creditibility = Math.floor(
+      Number.parseFloat(store.rating) * store.reviews.length +
+        store.reviews.length
     );
     return store;
   });
