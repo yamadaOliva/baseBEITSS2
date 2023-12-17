@@ -7,15 +7,11 @@ const path = require("path");
 
 dotenv.config();
 const getStore = async (params) => {
-  const {
-    limit,
-    page,
-    search,
-  } = params;
-  const ratingAz = params.ratingAz === 'true'
-  const ratingZa = params.ratingZa === 'true'
-  const credibilityAz = params.credibilityAz === 'true'
-  const credibilityZa = params.credibilityZa === 'true'
+  const { limit, page, search } = params;
+  const ratingAz = params.ratingAz === "true";
+  const ratingZa = params.ratingZa === "true";
+  const credibilityAz = params.credibilityAz === "true";
+  const credibilityZa = params.credibilityZa === "true";
   const sort = {};
   if (ratingAz) {
     sort.rating = 1;
@@ -305,9 +301,9 @@ const formatReaction = async (reaction) => {
       _id: reaction._id,
       id: reaction.id,
       user_id: reaction.user_id,
-      // username: user.username,
-      // avatar: user.avatar,
-      // fullname: user.fullname,
+      username: user.username,
+      avatar: user.avatar,
+      fullname: user.fullname,
       content: reaction.content,
       type: reaction.type,
       createdAt: reaction.date,
@@ -418,11 +414,13 @@ const createReactionService = async (storeId, reviewId, reaction) => {
     const notification = await createNotification({
       recipient: recipient._id,
       sender: user ? user._id : null,
-      message: `Đã ${(reaction.type).toString().toLowerCase()} bình luận của bạn: ${reaction.content}`,
+      message: `Đã ${reaction.type
+        .toString()
+        .toLowerCase()} bình luận của bạn: ${reaction.content}`,
       store: store._id,
     });
-    
-    sendNotification(notification)
+
+    sendNotification(notification);
     await Store.updateOne({ id: storeId }, { reviews: store.reviews });
     let formatedComment = await formatComment(comment);
     return {
