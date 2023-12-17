@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 require;
 import User from "../models/User.js";
 import Store from "../models/Store.js";
+import Notification from "../models/Notification.js";
+
 const { faker } = require("@faker-js/faker");
 mongoose.connect(
   "mongodb+srv://kien2572001:fEDmCm4G8swhO1B9@itss2.gixbqiu.mongodb.net/?retryWrites=true&w=majority",
@@ -125,6 +127,7 @@ const seedStores = async () => {
   });
   console.log(storeData);
   await Store.insertMany(storeData);
+  await Notification.deleteMany();
 };
 const seedData = async () => {
   await seedUsers();
