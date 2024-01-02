@@ -159,13 +159,18 @@ const createCommentService = async (id, comment) => {
     comment.id = store.reviews.length + 1;
     comment.images = images;
     comment.date = new Date();
-    console.log("comment", comment);
+    // console.log("comment", comment);
     let ptr = store.rating;
+    const initialValue = 0;
+    const sum = store.reviews.reduce((total, review) =>
+      total + Number.parseFloat(review.rating),
+      initialValue,
+    );
+
     ptr = (
-      (ptr * store.reviews.length + Number.parseFloat(comment.rating)) /
+      (sum + Number.parseFloat(comment.rating)) /
       (store.reviews.length + 1)
     ).toFixed(1);
-
     const result = await Store.updateOne(
       { id: id },
       { $push: { reviews: comment } }
